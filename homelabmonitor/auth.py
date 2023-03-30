@@ -27,13 +27,13 @@ def login_post():
     # check if user actually exists
     # take the user supplied password, hash it, and compare it to the hashed password in database
     if not user or not check_password_hash(user.password, password):
-        flash('Please check your login details and try again.')
+        flash('Invalid username or password')
         return redirect(url_for('auth.login'))
          # if user doesn't exist or password is wrong, reload the page
 
     # if the above check passes, then we know the user has the right credentials
     login_user(user, remember=remember)
-    return redirect(url_for('main.index'))
+    return redirect(url_for('main.dashboard'))
 
 @auth.route('/signup')
 def signup():
@@ -72,4 +72,4 @@ def signup_post():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('main.index'))
+    return redirect(url_for('auth.login'))
