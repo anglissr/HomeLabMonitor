@@ -9,4 +9,7 @@ main = Blueprint('main', __name__)
 @main.route('/')
 @login_required
 def index():
-    return render_template('index.html')
+    if current_user.is_authenticated:
+        name = current_user.username
+        print(name)
+    return render_template('index.html', name=name)
