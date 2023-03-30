@@ -1,0 +1,37 @@
+@font-face {
+    font-family: 'Heebo';
+    src: url('Heebo-VariableFont_wght.ttf') format('truetype');
+    font-weight: 200 400 500 800;
+    font-style: normal;
+  }
+
+
+  .form-control {
+    font-weight: 400;
+  }
+
+  h1, h2 {
+    font-family: 'Heebo', sans-serif;
+    font-weight: 500;
+  }
+
+  /* Change background color to light gray */
+  /* Increase font size of links */
+  .navbar-light .navbar-nav .nav-link {
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.1rem;
+  }
+  .dropdown-menu a:hover {
+      color: #000;
+      background-color: #fafafa;
+  }
+
+  .dropdown-menu a {
+      color: rgba(0, 0, 0, 0.55);
+      font-weight: 400;
+  }
+
+  .dropdown-menu {
+      background-color: #fafafa;
+      border: none;
+  }
