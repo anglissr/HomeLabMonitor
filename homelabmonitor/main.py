@@ -17,7 +17,11 @@ def index():
 @main.route('/dashboard')
 @login_required
 def dashboard():
-    if current_user.is_authenticated:
-        name = current_user.username
-        print(name)
+    name = current_user.username
     return render_template('index.html', name=name)
+
+@main.route('/settings')
+@login_required
+def settings():
+    name = current_user.username
+    return render_template('settings.html', name=name)

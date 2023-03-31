@@ -1,17 +1,42 @@
+
 @font-face {
     font-family: 'Heebo';
     src: url('Heebo-VariableFont_wght.ttf') format('truetype');
-    font-weight: 200 400 500 800;
+    font-weight: 100 800;
     font-style: normal;
   }
 
+  body {
+    font-family: 'Heebo', sans-serif;
+    font-weight: 400;
+  }
+  
+  h5 {
+    font-weight: 400;
+  }
+
+  h6 {
+    font-weight: 400;
+  }
+
+  #card-name {
+    font-weight: 500;
+  }
+
+  #footer {
+    font-weight: 400;
+  }
+
+  .card-footer {
+    background-color: #fff;
+  }
 
   .form-control {
     font-weight: 400;
   }
 
   h1, h2 {
-    font-family: 'Heebo', sans-serif;
+    
     font-weight: 500;
   }
 
@@ -21,6 +46,7 @@
     font-family: 'Heebo', sans-serif;
     font-size: 1.1rem;
   }
+  
   .dropdown-menu a:hover {
       color: #000;
       background-color: #fafafa;
