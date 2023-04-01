@@ -11,7 +11,10 @@ def job():
         for user in users:
             devices = Device.query.filter_by(user_id=user.id).all()
             for device in user.devices:
-                print(f"Device: {device.name}")
+                print(device.service1.api)
+                print(device.service2.api)
+                print(device.service3.api)
+                print(device.service4.api)
 
 scheduler = BackgroundScheduler()
 scheduler.add_job(job, 'interval', seconds=1)

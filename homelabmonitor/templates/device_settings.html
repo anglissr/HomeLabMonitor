@@ -38,37 +38,41 @@
           <div class="mb-3 text-body-secondary">
             <label for="line_1" class="form-label">Line 1</label>
             <select class="form-select" id="line_1" name="line_1">
-              <option value="temperature">Portainer</option>
-              <option value="humidity">Jellyfin</option>
-              <option value="pressure">Adguard Home</option>
-              <option value="custom">Radarr</option>
+              {% for service in services %}
+              <option value="{{ service.id }}" {% if service == device.service1 %}selected{% endif %}>
+                {{ service.name }}
+              </option>
+            {% endfor %}
             </select>
           </div>
           <div class="mb-3 text-body-secondary">
             <label for="line_2" class="form-label">Line 2</label>
             <select class="form-select" id="line_2" name="line_2">
-              <option value="temperature">Portainer</option>
-              <option value="humidity">Jellyfin</option>
-              <option value="pressure">Adguard Home</option>
-              <option value="custom">Radarr</option>
+              {% for service in services %}
+              <option value="{{ service.id }}" {% if service == device.service2 %}selected{% endif %}>
+                {{ service.name }}
+              </option>
+            {% endfor %}
             </select>
           </div> 
           <div class="mb-3 text-body-secondary">
             <label for="line_3" class="form-label">Line 3</label>
             <select class="form-select" id="line_3" name="line_3">
-              <option value="temperature">Portainer</option>
-              <option value="humidity">Jellyfin</option>
-              <option value="pressure">Adguard Home</option>
-              <option value="custom">Radarr</option>
+              {% for service in services %}
+              <option value="{{ service.id }}" {% if service == device.service3 %}selected{% endif %}>
+                {{ service.name }}
+              </option>
+            {% endfor %}
             </select>
           </div>
           <div class="mb-3 text-body-secondary">
             <label for="line_4" class="form-label">Line 4</label>
             <select class="form-select" id="line_4" name="line_4">
-              <option value="temperature">Portainer</option>
-              <option value="humidity">Jellyfin</option>
-              <option value="pressure">Adguard Home</option>
-              <option value="custom">Radarr</option>
+              {% for service in services %}
+              <option value="{{ service.id }}" {% if service == device.service4 %}selected{% endif %}>
+                {{ service.name }}
+              </option>
+            {% endfor %}
             </select>
           </div>
           <div class="text-center"> 

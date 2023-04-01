@@ -22,6 +22,7 @@ def create_app():
 
     from .models import User
     from .models import Device
+    from .models import Service
 
     @login_manager.user_loader
     def load_user(user_id):

@@ -1,5 +1,5 @@
 from . import db
-from .models import User, Device
+from .models import User, Device, Service   
 from flask import Blueprint, render_template, redirect, url_for, request, flash, abort, g
 from flask_login import current_user, login_required, login_manager
 
@@ -67,18 +67,29 @@ def device_settings(device_id):
     if not device or device.user != current_user:
         abort(404)
     user_name = current_user.username
-
+    services = Service.query.all()
     if request.method == 'POST':
         # get the data from the form
         name = request.form.get('name')
         ip_address = request.form.get('ip_address')
+        service_objs = []
+        for i in range(1, 5):
+            service_id = request.form.get(f'line_{i}')
+            if service_id:
+                service_obj = Service.query.filter_by(id=service_id).first()
+                service_objs.append(service_obj)
+        for service in service_objs:
+            print(service.id)
         device.name = name
         device.ip = ip_address
-        
+        device.service1_id = service_objs[0].id
+        device.service2_id = service_objs[1].id
+        device.service3_id = service_objs[2].id
+        device.service4_id = service_objs[3].id
         # save the changes to the database
         db.session.commit()
         flash('Success: Device settings saved.')
 
-    return render_template('device_settings.html', user_name=user_name, device=device)
+    return render_template('device_settings.html', user_name=user_name, device=device, services=services)
 
 
