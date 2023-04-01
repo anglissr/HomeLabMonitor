@@ -27,7 +27,7 @@ def login_post():
     # check if user actually exists
     # take the user supplied password, hash it, and compare it to the hashed password in database
     if not user or not check_password_hash(user.password, password):
-        flash('Invalid username or password')
+        flash('Error: Invalid username or password')
         return redirect(url_for('auth.login'))
          # if user doesn't exist or password is wrong, reload the page
 
@@ -48,7 +48,7 @@ def signup_post():
     password2 = request.form.get('password2')
 
     if (password != password2):
-        flash('Passwords do not match')
+        flash('Error: Passwords do not match')
         return redirect(url_for('auth.signup')) 
 
     # if this returns a user, then the email already exists in database

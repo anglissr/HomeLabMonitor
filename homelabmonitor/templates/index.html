@@ -7,6 +7,69 @@
 {% block content %}
 
 
+{% for device in devices %}
+<div class="modal fade" id="rename_{{ device.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Rename "{{ device.name }}"</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="rename_form" method="post">
+          <div class="mb-3 text-body-secondary">
+            <input type="hidden" name="form_id" value="rename_form">
+            <input type="hidden" id="device_id" name="device_id" value="{{ device.id }}">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ device.name }}">
+          </div>
+          <div class="text-center"> 
+            <button type="submit" class="btn btn-secondary">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% for device in devices %}
+<div class="modal fade" id="toggle_{{ device.id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+        {% if device.running %}
+          Stop
+        {% else %}
+          Start
+        {% endif %} 
+        "{{ device.name }}"</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="toggle_form" method="post">
+          <input type="hidden" name="form_id" value="toggle_form">
+          <input type="hidden" id="device_id" name="device_id" value="{{ device.id }}">
+          <div class="mb-3 text-body-secondary">
+            {% if device.running %}
+            Are you sure you want to stop this device?
+          {% else %}
+            Are you sure you want to start this device?
+          {% endif %} 
+          </div>
+          <div class="text-center"> 
+            <button type="submit" class="btn btn-secondary">Confirm</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
 <div class="container d-flex justify-content-center">
   <div class="col-lg-8 col-12">
     <div class="d-flex justify-content-between align-items-center">
@@ -14,54 +77,40 @@
       <button type="button" class="btn btn-secondary">Add</button>
     </div>
     <br>
+    {% for device in devices %}
     <div class="card shadow-sm" style="border-width: 0px;">
       <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 id="card-name" class="mt-2">Server Room <small><span class="badge bg-success">Running</span></small></h5>
+        <h5 id="card-name" class="mt-2">{{ device.name }} 
+        {% if device.running %}
+          <small><span class="badge bg-success">Running</span></small></h5>
+        {% else %}
+          <small><span class="badge bg-danger">Stopped</span></small></h5>
+        {% endif %}
         <div class="dropdown">
           <a class="text-secondary" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" style="caret-display: none;" aria-expanded="false">
             <i class="fa fa-cog"></i>
           </a>
           <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="{{ url_for('main.settings') }}">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Rename</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('main.device_settings', device_id=device.id) }}">Settings</a></li>
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#rename_{{ device.id }}">Rename</a></li>
+            {% if device.running %}
+            <li><a class="dropdown-item" href="#" style="color: rgb(188, 77, 77);" data-bs-toggle="modal" data-bs-target="#toggle_{{ device.id }}">Stop</a></li>
+            {% else %}
+            <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#toggle_{{ device.id }}">Start</a></li>
+          {% endif %}
           </ul>
         </div>
       </div>
       <div class="card-body">
-          <h6 class="card-subtitle mb-2 text-body-secondary">Wemos D1 Mini</h6>
-          <h6 class="card-subtitle text-body-secondary">192.168.68.80</h6>
+          <h6 class="card-subtitle mb-2 text-body-secondary">Device IP Address</h6>
+          <h6 class="card-subtitle text-body-secondary">{{ device.ip }}</h6>
       </div>
       <div class="card-footer pt-1 text-body-secondary">
         <small id="footer">Last updated 9 minutes ago</small>
       </div>
     </div>
-
     <br>
-    <div class="card shadow-sm" style="border-width: 0px;">
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <h5 id="card-name" class="mt-2">Desk <small><span class="badge bg-danger">Stopped</span></small></h5>
-        <div class="dropdown">
-          <a class="text-secondary" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" style="caret-display: none;" aria-expanded="false">
-            <i class="fa fa-cog"></i>
-          </a>
-          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuLink">
-            <li><a class="dropdown-item" href="{{ url_for('main.settings') }}">Settings</a></li>
-            <li><a class="dropdown-item" href="#">Rename</a></li>
-
-          </ul>
-        </div>
-      </div>
-      <div class="card-body">
-          <h6 class="card-subtitle mb-2 text-body-secondary">Wemos D1 Mini</h6>
-          <h6 class="card-subtitle text-body-secondary">192.168.68.61</h6>
-      </div>
-      <div class="card-footer pt-1 text-body-secondary">
-        <small id="footer">Last updated 32 minutes ago</small>
-      </div>
-    
-    </div>
-
-    <br>
+    {% endfor %}
     
     
   </div>

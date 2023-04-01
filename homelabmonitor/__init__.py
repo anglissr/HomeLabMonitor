@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_migrate import Migrate
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # init SQLAlchemy so we can use it later in our models
 db = SQLAlchemy()
@@ -11,7 +13,7 @@ def create_app():
 
     app.config['SECRET_KEY'] = 'secret-key-goes-here'
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
-
+    migrate = Migrate(app, db)
     db.init_app(app)
 
     login_manager = LoginManager()
@@ -19,6 +21,7 @@ def create_app():
     login_manager.init_app(app)
 
     from .models import User
+    from .models import Device
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -35,10 +38,11 @@ def create_app():
 
     with app.app_context():
         db.create_all()
-        user = User(
-            username="admin",
-            password="admin",
-        )
-        db.session.add(user)
+        #user = User(
+        #    username="admin",
+        #    password=generate_password_hash("admin", method='sha256')
+        #)
+        #db.session.add(user)
+        #db.session.commit()
 
     return app

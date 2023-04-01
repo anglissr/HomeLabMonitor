@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Home{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container d-flex justify-content-center">
+  <div class="col-lg-8 col-12">
+    <div class="d-flex justify-content-between align-items-center">
+      <h3>My Devices</h3>
+      <button type="button" class="btn btn-secondary">Add</button>
+    </div>
+    <br>
+    
+    <div class="card shadow-sm" style="border-width: 0px;">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 id="card-name" class="mt-2">Server Room <small><span class="badge bg-success">Running</span></small></h5>
+        <div class="dropdown">
+          <a class="text-secondary" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" style="caret-display: none;" aria-expanded="false">
+            <i class="fa fa-cog"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="{{ url_for('main.settings') }}">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Rename</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-body-secondary">Wemos D1 Mini</h6>
+          <h6 class="card-subtitle text-body-secondary">192.168.68.80</h6>
+      </div>
+      <div class="card-footer pt-1 text-body-secondary">
+        <small id="footer">Last updated 9 minutes ago</small>
+      </div>
+    </div>
+
+    <br>
+    <div class="card shadow-sm" style="border-width: 0px;">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 id="card-name" class="mt-2">Desk <small><span class="badge bg-danger">Stopped</span></small></h5>
+        <div class="dropdown">
+          <a class="text-secondary" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" style="caret-display: none;" aria-expanded="false">
+            <i class="fa fa-cog"></i>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="dropdownMenuLink">
+            <li><a class="dropdown-item" href="{{ url_for('main.settings') }}">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Rename</a></li>
+
+          </ul>
+        </div>
+      </div>
+      <div class="card-body">
+          <h6 class="card-subtitle mb-2 text-body-secondary">Wemos D1 Mini</h6>
+          <h6 class="card-subtitle text-body-secondary">192.168.68.61</h6>
+      </div>
+      <div class="card-footer pt-1 text-body-secondary">
+        <small id="footer">Last updated 32 minutes ago</small>
+      </div>
+    
+    </div>
+
+    <br>
+    
+    
+  </div>
+</div>
+
+<!-- jQuery -->
+<script
+			  src="https://code.jquery.com/jquery-3.6.4.js"
+			  integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+			  crossorigin="anonymous"></script>
+
+<!-- Popper.js -->
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+
+{% endblock %}
